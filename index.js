@@ -8,9 +8,10 @@ var defaults = {
     viewportHeight: 568, // not now used; TODO: need for different units and math for different properties
     unitPrecision: 5,
     viewportUnit: 'vw',
-    propertyBlacklist: [],
+    propertyBlacklist: ['font'],
     selectorBlackList: [],
     minPixelValue: 1,
+    libraryRoot: 'node_modules',
     mediaQuery: false
 };
 
@@ -40,7 +41,9 @@ module.exports = postcss.plugin('postcss-px-to-viewport', function (options) {
 
             if (blacklistedSelector(opts.selectorBlackList, decl.parent.selector)) return;
 
-            decl.value = decl.value.replace(pxRegex, createPxReplace(opts.viewportWidth, opts.minPixelValue, opts.unitPrecision, opts.viewportUnit));
+            var LibraryRate = isLibrary(opts.LibraryUI, decl.source.input.file, opts.libraryRoot) ? 2 : 1;
+
+            decl.value = decl.value.replace(pxRegex, createPxReplace(opts.viewportWidth, opts.minPixelValue, opts.unitPrecision, opts.viewportUnit)) * LibraryRate;
         });
 
         if (opts.mediaQuery) {
@@ -90,4 +93,22 @@ function excludePath(exclude, path) {
         if (typeof regex === 'string') return path.indexOf(regex) !== -1;
         return path.match(regex);
     });
+}
+
+function isLibrary(library, path, libraryRoot) {
+    if (!library) return;
+    var tempLibrary = '';
+    if (typeof path !== 'string') return;
+    if (typeof library === 'string') {
+        tempLibrary = [libraryRoot, library].join('/');
+        return path.indexOf(tempLibrary) !== -1;
+    }
+    if (Array.isArray(library)) {
+        return library.some(function (regex) {
+            tempLibrary = [libraryRoot, regex].join('/');
+            if (typeof regex === 'string') return path.indexOf(tempLibrary) !== -1;
+            return path.match(regex);
+        });
+    }
+    return false;
 }

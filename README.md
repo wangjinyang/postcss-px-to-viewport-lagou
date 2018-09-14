@@ -98,6 +98,8 @@ Default:
   selectorBlackList: [],
   minPixelValue: 1,
   exclude: [],
+  LibraryUI: [],
+  libraryRoot: 'node_modules',
   mediaQuery: false
 }
 ```
@@ -114,6 +116,8 @@ Default:
         - `[/^body$/]` will match `body` but not `.body`
 - `minPixelValue` (Number) Set the minimum pixel value to replace.
 - `exclude` (Array) just like selectorBlackList.
+- `LibraryUI` (Array) example vux,miui. if style in LibraryUI, result = (2 * (x)px/viewportWidth) viewportUnit
+- `libraryRoot` (String) example node_modules.
 - `mediaQuery` (Boolean) Allow px to be converted in media queries.
 
 ### Use with gulp-postcss
