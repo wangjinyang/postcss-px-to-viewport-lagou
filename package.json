@@ -1,0 +1,30 @@
+{
+  "name": "@quellingblade/postcss-px-to-viewport",
+  "description": "A CSS post-processor that converts px to viewport units (vw, vh, vmin, vmax).",
+  "version": "0.0.4",
+  "author": "quellingblade",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:quellingblade/postcss-px-to-viewport.git"
+  },
+  "homepage": "https://github.com/QuellingBlade/postcss-px-to-viewport",
+  "main": "index.js",
+  "keywords": [
+    "css",
+    "units",
+    "pixel",
+    "px",
+    "viewport",
+    "vw",
+    "vh",
+    "vmin",
+    "vmax",
+    "postcss",
+    "postcss-plugin"
+  ],
+  "dependencies": {
+    "object-assign": "^4.0.1",
+    "postcss": "^5.0.2"
+  }
+}
