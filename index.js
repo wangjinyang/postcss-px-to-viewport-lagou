@@ -43,7 +43,7 @@ module.exports = postcss.plugin('postcss-px-to-viewport', function (options) {
 
             var LibraryRate = isLibrary(opts.LibraryUI, decl.source.input.file, opts.libraryRoot) ? 2 : 1;
 
-            decl.value = decl.value.replace(pxRegex, createPxReplace(opts.viewportWidth, opts.minPixelValue, opts.unitPrecision, opts.viewportUnit)) * LibraryRate;
+            decl.value = decl.value.replace(pxRegex, createPxReplace(opts.viewportWidth, opts.minPixelValue, opts.unitPrecision, opts.viewportUnit), LibraryRate);
         });
 
         if (opts.mediaQuery) {
@@ -56,12 +56,12 @@ module.exports = postcss.plugin('postcss-px-to-viewport', function (options) {
     };
 });
 
-function createPxReplace(viewportSize, minPixelValue, unitPrecision, viewportUnit) {
+function createPxReplace(viewportSize, minPixelValue, unitPrecision, viewportUnit, LibraryRate) {
     return function (m, $1) {
         if (!$1) return m;
         var pixels = parseFloat($1);
         if (pixels <= minPixelValue) return m;
-        return toFixed((pixels / viewportSize * 100), unitPrecision) + viewportUnit;
+        return toFixed((pixels * LibraryRate / viewportSize * 100), unitPrecision) + viewportUnit;
     };
 }
 
