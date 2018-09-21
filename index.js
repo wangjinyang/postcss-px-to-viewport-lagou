@@ -4,13 +4,14 @@ var objectAssign = require('object-assign');
 
 var defaults = {
     unitToConvert: 'px',
-    viewportWidth: 320,
-    viewportHeight: 568, // not now used; TODO: need for different units and math for different properties
-    unitPrecision: 5,
+    viewportWidth: 750,
+    viewportHeight: 1366, // not now used; TODO: need for different units and math for different properties
+    unitPrecision: 3,
     viewportUnit: 'vw',
     propertyBlacklist: ['font'],
     selectorBlackList: [],
     minPixelValue: 1,
+    LibraryRate: 2,
     libraryRoot: 'node_modules',
     mediaQuery: false
 };
@@ -41,7 +42,7 @@ module.exports = postcss.plugin('postcss-px-to-viewport-lagou', function (option
 
             if (blacklistedSelector(opts.selectorBlackList, decl.parent.selector)) return;
 
-            var LibraryRate = isLibrary(opts.LibraryUI, decl.source.input.file, opts.libraryRoot) ? 2 : 1;
+            var LibraryRate = isLibrary(opts.LibraryUI, decl.source.input.file, opts.libraryRoot) ? opts.LibraryRate : 1;
 
             decl.value = decl.value.replace(pxRegex, createPxReplace(opts.viewportWidth, opts.minPixelValue, opts.unitPrecision, opts.viewportUnit, LibraryRate));
         });

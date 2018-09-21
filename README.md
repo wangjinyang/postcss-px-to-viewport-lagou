@@ -90,15 +90,16 @@ Default:
 ```js
 {
   unitToConvert: 'px',
-  viewportWidth: 320,
-  viewportHeight: 568, // not now used; TODO: need for different units and math for different properties
-  unitPrecision: 5,
+  viewportWidth: 750,
+  viewportHeight: 1366, // not now used; TODO: need for different units and math for different properties
+  unitPrecision: 3,
   viewportUnit: 'vw',
   propertyBlacklist: ['font'],
   selectorBlackList: [],
   minPixelValue: 1,
   exclude: [],
   LibraryUI: [],
+  LibraryRate: 2,
   libraryRoot: 'node_modules',
   mediaQuery: false
 }
@@ -117,6 +118,7 @@ Default:
 - `minPixelValue` (Number) Set the minimum pixel value to replace.
 - `exclude` (Array) just like selectorBlackList.
 - `LibraryUI` (Array) example vux,miui. if style in LibraryUI, result = (2 * (x)px/viewportWidth) viewportUnit
+- `LibraryRate` (Number) vendor UI scale rate, example vux,miui LibraryRate is 2.
 - `libraryRoot` (String) example node_modules.
 - `mediaQuery` (Boolean) Allow px to be converted in media queries.
 
