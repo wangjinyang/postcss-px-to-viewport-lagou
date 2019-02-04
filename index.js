@@ -62,7 +62,7 @@ function createPxReplace(viewportSize, minPixelValue, unitPrecision, viewportUni
         if (!$1) return m;
         var pixels = parseFloat($1);
         if (pixels <= minPixelValue) return m;
-        return toFixed((pixels * LibraryRate / viewportSize * (viewportUnit === 'vw' ? 100 : 1)), unitPrecision) + viewportUnit;
+        return toFixed((pixels * LibraryRate / viewportSize * (viewportUnit === 'vw' ? 100 : 10)), unitPrecision) + viewportUnit;
     };
 }
 
